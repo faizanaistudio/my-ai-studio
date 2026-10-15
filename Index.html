@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova AI Studio</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b0d12;color:#f5f5f7;font-family:Arial,sans-serif}
+header{padding:22px 6%;border-bottom:1px solid #292d38}
+.logo{font-size:24px;font-weight:bold;color:#b9a4ff}
+main{max-width:950px;margin:45px auto;padding:20px}
+h1{font-size:clamp(32px,6vw,52px);margin-bottom:12px}
+p{color:#a7adbb;line-height:1.6}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0}
+button{cursor:pointer;border:1px solid #373b49;background:#171a23;color:white;padding:12px 17px;border-radius:10px}
+button.active,button:hover{background:#7755df;border-color:#7755df}
+.panel{background:#13161e;border:1px solid #2c3040;padding:22px;border-radius:16px}
+textarea{width:100%;height:125px;background:#0b0d12;color:white;border:1px solid #373b49;border-radius:10px;padding:14px;font-size:16px;resize:vertical}
+select{background:#0b0d12;color:white;padding:10px;border:1px solid #373b49;border-radius:8px}
+.generate{background:#7755df;width:100%;margin-top:16px;font-size:16px}
+#notice{margin-top:16px;color:#c8bbff}
+footer{text-align:center;padding:30px;color:#777d8c;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="logo">✦ NOVA AI STUDIO</div></header>
+<main>
+<p>YOUR CREATIVE WORLD, ONE STUDIO</p>
+<h1>Bring your imagination to life.</h1>
+<p>Create images, videos, voiceovers and complete edits in one place.</p>
+<div class="tabs">
+<button class="active" onclick="choose('Video',this)">🎬 Video</button>
+<button onclick="choose('Image',this)">🖼 Image</button>
+<button onclick="choose('Voiceover',this)">🎙 Voiceover</button>
+<button onclick="choose('Editing',this)">✂ Editing</button>
+</div>
+<section class="panel">
+<h2 id="heading">AI Video Generator</h2>
+<p id="description">Describe the scene you want to create.</p>
+<textarea id="prompt" placeholder="Describe your idea here..."></textarea>
+<p>Style / Settings</p>
+<select id="style">
+<option>Cinematic</option>
+<option>Realistic</option>
+<option>Fantasy</option>
+<option>Anime</option>
+</select>
+<button class="generate" onclick="start()">Create with AI →</button>
+<div id="notice">Studio preview — AI engine not connected yet.</div>
+</section>
+</main>
+<footer>Nova AI Studio · Your creativity, your universe.</footer>
+<script>
+let current='Video';
+function choose(type,btn){
+ current=type;
+ document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ document.getElementById('heading').textContent='AI '+type+' Generator';
+ document.getElementById('description').textContent=
+ type==='Video'?'Describe the scene you want to create.':
+ type==='Image'?'Describe the image you want to generate.':
+ type==='Voiceover'?'Enter the text you want spoken.':
+ 'Describe the video or editing task you need.';
+ document.getElementById('prompt').placeholder=
+ type==='Voiceover'?'Enter your voiceover script...':'Describe your idea here...';
+ document.getElementById('notice').textContent='Studio preview — AI engine not connected yet.';
+}
+function start(){
+ const p=document.getElementById('prompt').value.trim();
+ document.getElementById('notice').textContent=p?
+ 'Your '+current.toLowerCase()+' request is ready. Connect an AI engine to generate the result.':
+ 'Please describe your idea first.';
+}
+</script>
+</body>
+</html>
