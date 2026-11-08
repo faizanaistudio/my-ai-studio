@@ -5,29 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVA AI STUDIO</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{
-  background:#080a12;
-  color:#f5f5fa;
-  font-family:Arial,sans-serif;
-  min-height:100vh;
-}
-header{
-  padding:20px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #202333;
-  background:#0c0f19;
-}
-.logo{
-  font-size:25px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:#fff;
-}
+body{background:#080a12;color:#f5f5fa;font-family:Arial,sans-serif;min-height:100vh}
+header{padding:20px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #202333;background:#0c0f19}
+.logo{font-size:25px;font-weight:900;letter-spacing:3px}
 .logo span{color:#9b6cff}
 .status{font-size:12px;color:#7df5b0}
 .container{max-width:1000px;margin:45px auto;padding:20px}
@@ -35,278 +17,199 @@ header{
 .hero h1{font-size:38px;margin-bottom:12px}
 .hero h1 span{color:#a77aff}
 .hero p{color:#a5a8b9;line-height:1.6}
-.tabs{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin:25px 0;
-}
-.tab{
-  padding:12px 20px;
-  border:1px solid #292d40;
-  border-radius:10px;
-  background:#111522;
-  color:#aaaec0;
-  cursor:pointer;
-}
-.tab.active{
-  background:#8c55ed;
-  color:white;
-  border-color:#8c55ed;
-}
-.panel{
-  background:#111522;
-  border:1px solid #292d40;
-  border-radius:18px;
-  padding:25px;
-}
+.tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:25px 0}
+.tab{padding:12px 20px;border:1px solid #292d40;border-radius:10px;background:#111522;color:#aaaec0;cursor:pointer}
+.tab.active{background:#8c55ed;color:white;border-color:#8c55ed}
+.panel{background:#111522;border:1px solid #292d40;border-radius:18px;padding:25px}
 .panel h2{font-size:22px;margin-bottom:8px}
 .subtitle{color:#999fb2;font-size:14px;margin-bottom:22px}
-label{
-  display:block;
-  margin:18px 0 9px;
-  color:#d9d9e5;
-  font-size:14px;
-}
-textarea,select{
-  width:100%;
-  background:#090d17;
-  border:1px solid #34394d;
-  border-radius:10px;
-  color:white;
-  padding:14px;
-  font-size:15px;
-  outline:none;
-}
+label{display:block;margin:18px 0 9px;color:#d9d9e5;font-size:14px}
+textarea,select{width:100%;background:#090d17;border:1px solid #34394d;border-radius:10px;color:white;padding:14px;font-size:15px;outline:none}
 textarea{height:125px;resize:vertical}
 textarea:focus,select:focus{border-color:#9b6cff}
-.options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
-.generate{
-  width:100%;
-  padding:16px;
-  margin-top:24px;
-  border:0;
-  border-radius:11px;
-  background:linear-gradient(90deg,#7441dc,#a35cff);
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.generate{width:100%;padding:16px;margin-top:24px;border:0;border-radius:11px;background:linear-gradient(90deg,#7441dc,#a35cff);color:white;font-size:16px;font-weight:bold;cursor:pointer}
 .generate:disabled{opacity:.6;cursor:wait}
-.message{
-  text-align:center;
-  margin-top:18px;
-  color:#b7a1ff;
-  font-size:14px;
-  white-space:pre-wrap;
-}
-.result{
-  margin-top:25px;
-  display:none;
-  text-align:center;
-}
-.result img{
-  max-width:100%;
-  border-radius:12px;
-  border:1px solid #34394d;
-}
-.download{
-  display:inline-block;
-  margin-top:15px;
-  padding:12px 22px;
-  background:#242b3e;
-  color:white;
-  border-radius:9px;
-  text-decoration:none;
-}
-.coming{
-  text-align:center;
-  padding:55px 15px;
-  color:#aeb2c3;
-}
-footer{
-  text-align:center;
-  color:#777d90;
-  padding:30px 10px;
-  font-size:12px;
-}
+.message{text-align:center;margin-top:18px;color:#b7a1ff;font-size:14px;white-space:pre-wrap}
+.result{margin-top:25px;display:none;text-align:center}
+.result img{max-width:100%;border-radius:12px;border:1px solid #34394d}
+.download{display:inline-block;margin-top:15px;padding:12px 22px;background:#242b3e;color:white;border-radius:9px;text-decoration:none}
+.coming{text-align:center;padding:55px 15px;color:#aeb2c3}
+footer{text-align:center;color:#777d90;padding:30px 10px;font-size:12px}
 @media(max-width:600px){
-  .container{margin:20px auto;padding:14px}
-  .hero h1{font-size:29px}
-  .panel{padding:18px}
-  .options{grid-template-columns:1fr}
-  header{padding:17px 5%}
+.container{margin:20px auto;padding:14px}
+.hero h1{font-size:29px}
+.panel{padding:18px}
+.options{grid-template-columns:1fr}
+header{padding:17px 5%}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">NOVA <span>AI</span> STUDIO</div>
-  <div class="status">● AI STUDIO</div>
+<div class="logo">NOVA <span>AI</span> STUDIO</div>
+<div class="status">● AI STUDIO</div>
 </header>
 
 <main class="container">
 
-  <section class="hero">
-    <h1>Create with <span>Artificial Intelligence</span></h1>
-    <p>Your creative world. One studio. Unlimited possibilities.</p>
-  </section>
+<section class="hero">
+<h1>Create with <span>Artificial Intelligence</span></h1>
+<p>Your creative world. One studio. Unlimited possibilities.</p>
+</section>
 
-  <nav class="tabs">
-    <button class="tab" onclick="showTab('video',this)">🎬 Video</button>
-    <button class="tab active" onclick="showTab('image',this)">🖼 Image</button>
-    <button class="tab" onclick="showTab('voice',this)">🎙 Voiceover</button>
-    <button class="tab" onclick="showTab('editing',this)">✂ Editing</button>
-  </nav>
+<nav class="tabs">
+<button class="tab" onclick="showTab('video',this)">🎬 Video</button>
+<button class="tab active" onclick="showTab('image',this)">🖼 Image</button>
+<button class="tab" onclick="showTab('voice',this)">🎙 Voiceover</button>
+<button class="tab" onclick="showTab('editing',this)">✂ Editing</button>
+</nav>
 
-  <section class="panel" id="imagePanel">
-    <h2>AI Image Generator</h2>
-    <p class="subtitle">Turn your imagination into images with AI.</p>
+<section class="panel" id="imagePanel">
+<h2>AI Image Generator</h2>
+<p class="subtitle">Turn your imagination into images with AI.</p>
 
-    <label for="prompt">Describe your image</label>
-    <textarea id="prompt" maxlength="2048"
-      placeholder="Example: A beautiful cinematic sunset over the mountains, ultra realistic, detailed photography..."></textarea>
+<label for="prompt">Describe your image</label>
+<textarea id="prompt" maxlength="2048" placeholder="Describe the image you want to create..."></textarea>
 
-    <div class="options">
-      <div>
-        <label for="style">Image Style</label>
-        <select id="style">
-          <option value="">Default</option>
-          <option value="photorealistic, highly detailed photography">Realistic</option>
-          <option value="cinematic lighting, movie still">Cinematic</option>
-          <option value="digital art, highly detailed">Digital Art</option>
-          <option value="anime illustration">Anime</option>
-          <option value="3D render, detailed">3D Render</option>
-          <option value="watercolor painting">Watercolor</option>
-        </select>
-      </div>
+<div class="options">
 
-      <div>
-        <label for="ratio">Aspect Ratio</label>
-        <select id="ratio">
-          <option value="1:1">Square (1:1)</option>
-          <option value="16:9">Landscape (16:9)</option>
-          <option value="9:16">Portrait (9:16)</option>
-        </select>
-      </div>
-    </div>
+<div>
+<label for="style">Image Style</label>
+<select id="style">
+<option value="">Default</option>
+<option value="photorealistic, highly detailed photography">Realistic</option>
+<option value="cinematic lighting, movie still">Cinematic</option>
+<option value="digital art, highly detailed">Digital Art</option>
+<option value="anime illustration">Anime</option>
+<option value="3D render, detailed">3D Render</option>
+<option value="watercolor painting">Watercolor</option>
+</select>
+</div>
 
-    <button class="generate" id="generateBtn" onclick="generateImage()">
-      ✨ Generate Image
-    </button>
+<div>
+<label for="ratio">Aspect Ratio</label>
+<select id="ratio">
+<option value="1:1">Square (1:1)</option>
+<option value="16:9">Landscape (16:9)</option>
+<option value="9:16">Portrait (9:16)</option>
+</select>
+</div>
 
-    <div class="message" id="message"></div>
+<div>
+<label for="quality">Image Quality</label>
+<select id="quality">
+<option value="4">Standard - 4 Steps</option>
+<option value="6">High - 6 Steps</option>
+<option value="8">Ultra - 8 Steps</option>
+</select>
+</div>
 
-    <div class="result" id="result">
-      <img id="generatedImage" alt="AI generated image">
-      <br>
-      <a id="downloadBtn" class="download" download="nova-ai-image.jpg">
-        ⬇ Download Image
-      </a>
-    </div>
-  </section>
+</div>
 
-  <section class="panel" id="otherPanel" style="display:none">
-    <div class="coming">
-      <h2 id="comingTitle">Coming Soon</h2>
-      <p style="margin-top:12px">This AI tool will be activated in a future update.</p>
-    </div>
-  </section>
+<button class="generate" id="generateBtn" onclick="generateImage()">
+✨ Generate Image
+</button>
+
+<div class="message" id="message"></div>
+
+<div class="result" id="result">
+<img id="generatedImage" alt="AI generated image">
+<br>
+<a id="downloadBtn" class="download" download="nova-ai-image.jpg">⬇ Download Image</a>
+</div>
+</section>
+
+<section class="panel" id="otherPanel" style="display:none">
+<div class="coming">
+<h2 id="comingTitle">Coming Soon</h2>
+<p style="margin-top:12px">This AI tool will be activated in a future update.</p>
+</div>
+</section>
 
 </main>
 
-<footer>
-  NOVA AI STUDIO © 2026 | Create Beyond Imagination
-</footer>
+<footer>NOVA AI STUDIO © 2026 | Create Beyond Imagination</footer>
 
 <script>
 const API_URL = "https://nova-ai-backend.zitband1.workers.dev/generate";
 
 function showTab(tab, button) {
-  document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-  button.classList.add("active");
+document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+button.classList.add("active");
 
-  const imagePanel = document.getElementById("imagePanel");
-  const otherPanel = document.getElementById("otherPanel");
+const imagePanel = document.getElementById("imagePanel");
+const otherPanel = document.getElementById("otherPanel");
 
-  if (tab === "image") {
-    imagePanel.style.display = "block";
-    otherPanel.style.display = "none";
-  } else {
-    imagePanel.style.display = "none";
-    otherPanel.style.display = "block";
+if(tab === "image") {
+imagePanel.style.display = "block";
+otherPanel.style.display = "none";
+} else {
+imagePanel.style.display = "none";
+otherPanel.style.display = "block";
 
-    const names = {
-      video: "AI Video Generator",
-      voice: "AI Voiceover Studio",
-      editing: "AI Editing Studio"
-    };
+const names = {
+video:"AI Video Generator",
+voice:"AI Voiceover Studio",
+editing:"AI Editing Studio"
+};
 
-    document.getElementById("comingTitle").textContent =
-      names[tab] || "Coming Soon";
-  }
+document.getElementById("comingTitle").textContent = names[tab];
+}
 }
 
 async function generateImage() {
-  const prompt = document.getElementById("prompt").value.trim();
-  const style = document.getElementById("style").value;
-  const ratio = document.getElementById("ratio").value;
+const prompt = document.getElementById("prompt").value.trim();
+const style = document.getElementById("style").value;
+const ratio = document.getElementById("ratio").value;
+const steps = Number(document.getElementById("quality").value);
 
-  const message = document.getElementById("message");
-  const button = document.getElementById("generateBtn");
-  const resultBox = document.getElementById("result");
+const message = document.getElementById("message");
+const button = document.getElementById("generateBtn");
+const resultBox = document.getElementById("result");
 
-  if (!prompt) {
-    message.textContent = "Please enter an image description first.";
-    return;
-  }
+if(!prompt) {
+message.textContent = "Please enter an image description first.";
+return;
+}
 
-  const finalPrompt =
-    prompt + (style ? ", " + style : "") +
-    ", aspect ratio " + ratio;
+const finalPrompt = prompt +
+(style ? ", " + style : "") +
+", aspect ratio " + ratio;
 
-  button.disabled = true;
-  button.textContent = "⏳ Creating your image...";
-  message.textContent = "AI is creating your image. Please wait...";
-  resultBox.style.display = "none";
+button.disabled = true;
+button.textContent = "⏳ Creating your image...";
+message.textContent = "AI is creating your image. Please wait...";
+resultBox.style.display = "none";
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        prompt: finalPrompt
-      })
-    });
+try {
+const response = await fetch(API_URL, {
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+prompt:finalPrompt,
+steps:steps
+})
+});
 
-    const data = await response.json();
+const data = await response.json();
 
-    if (!response.ok || !data.success || !data.dataURI) {
-      throw new Error(data.error || "Image generation failed.");
-    }
+if(!response.ok || !data.success || !data.dataURI) {
+throw new Error(data.error || "Image generation failed.");
+}
 
-    document.getElementById("generatedImage").src = data.dataURI;
-    document.getElementById("downloadBtn").href = data.dataURI;
+document.getElementById("generatedImage").src = data.dataURI;
+document.getElementById("downloadBtn").href = data.dataURI;
+resultBox.style.display = "block";
+message.textContent = "✅ Your image is ready! Quality: " + steps + " Steps";
 
-    resultBox.style.display = "block";
-    message.textContent = "✅ Your image is ready!";
-
-  } catch (error) {
-    message.textContent = "❌ " + error.message;
-  } finally {
-    button.disabled = false;
-    button.textContent = "✨ Generate Image";
-  }
+} catch(error) {
+message.textContent = "❌ " + error.message;
+} finally {
+button.disabled = false;
+button.textContent = "✨ Generate Image";
+}
 }
 </script>
 
