@@ -1,85 +1,227 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA AI STUDIO</title>
+<title>NOVA AI STUDIO - AI Image Generator</title>
+<meta name="description" content="Create beautiful AI images from text for free with NOVA AI STUDIO.">
 <style>
-:root{--bg:#090b12;--panel:#121725;--line:#273044;--text:#f4f6ff;--muted:#9ca8bd;--accent:#a78bfa;--cyan:#67e8f9}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#192039,#090b12 55%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
-header{padding:24px 5%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-.logo{font-size:25px;font-weight:900;letter-spacing:3px}.logo span{color:var(--accent)}
-header small{color:var(--muted)}
-main{max-width:1100px;margin:auto;padding:28px 16px}
-.hero{text-align:center;margin:20px 0 30px}.hero h1{font-size:clamp(30px,6vw,48px);margin:0 0 10px}.hero p{color:var(--muted)}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:25px 0}
-.tab{background:#171e2e;border:1px solid var(--line);color:var(--text);padding:12px 19px;border-radius:12px;cursor:pointer}
-.tab.active{background:var(--accent);color:#100d1c;border-color:var(--accent);font-weight:bold}
-.panel{display:none;background:rgba(18,23,37,.94);border:1px solid var(--line);border-radius:18px;padding:22px;margin:15px 0}
-.panel.active{display:block}
-h2{margin-top:0}label{display:block;color:var(--muted);font-size:14px;margin:15px 0 7px}
-input,textarea,select{width:100%;padding:13px;background:#090e19;color:var(--text);border:1px solid var(--line);border-radius:10px;font:inherit}
-textarea{min-height:110px;resize:vertical}
-button{background:var(--accent);color:#100d1c;border:0;border-radius:10px;padding:12px 18px;font-weight:bold;cursor:pointer;margin:8px 5px 8px 0}
-button.secondary{background:#222c40;color:var(--text);border:1px solid var(--line)}
-button:disabled{opacity:.5;cursor:not-allowed}
-.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
-.preview{width:100%;max-height:600px;object-fit:contain;background:#070a10;border:1px solid var(--line);border-radius:12px;margin-top:15px}
-video{width:100%;max-height:460px;background:#05070c;border-radius:12px;margin-top:12px}
-.status{color:var(--cyan);min-height:24px;margin:12px 0;white-space:pre-wrap}
-.note{font-size:13px;color:var(--muted);line-height:1.6}
-hr{border:0;border-top:1px solid var(--line);margin:22px 0}
-footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
-a{color:var(--cyan)}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#101114;
+  color:#f5f5f5;
+}
+header{
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 7%;
+  border-bottom:1px solid #292a30;
+  background:#15161a;
+}
+.logo{font-size:22px;font-weight:800;letter-spacing:1px}
+.logo span{color:#a78bfa}
+nav{display:flex;align-items:center;gap:18px}
+nav a{color:#bbb;text-decoration:none;font-size:14px}
+button{
+  cursor:pointer;
+  border:0;
+  border-radius:9px;
+  padding:12px 18px;
+  font-weight:700;
+}
+.premium{
+  background:#282235;
+  color:#d6baff;
+  border:1px solid #7054a5;
+}
+main{
+  width:min(950px,92%);
+  margin:45px auto;
+}
+.intro{text-align:center;margin-bottom:30px}
+.intro h1{font-size:34px;margin:0 0 12px}
+.intro p{color:#a4a4ad;margin:0;font-size:15px}
+.panel{
+  background:#191a20;
+  border:1px solid #303139;
+  border-radius:16px;
+  padding:25px;
+}
+label{display:block;font-size:14px;font-weight:700;margin-bottom:10px}
+textarea{
+  width:100%;
+  min-height:125px;
+  resize:vertical;
+  background:#111216;
+  color:white;
+  border:1px solid #393a43;
+  border-radius:10px;
+  padding:15px;
+  font-size:15px;
+  outline:none;
+  line-height:1.6;
+}
+textarea:focus{border-color:#9871e8}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin-top:20px;
+}
+select{
+  width:100%;
+  padding:13px;
+  background:#111216;
+  color:white;
+  border:1px solid #393a43;
+  border-radius:9px;
+  outline:none;
+}
+.generate{
+  width:100%;
+  margin-top:22px;
+  background:linear-gradient(100deg,#7652d6,#a16be8);
+  color:white;
+  font-size:16px;
+  padding:15px;
+}
+.generate:disabled{opacity:.6;cursor:wait}
+.status{
+  text-align:center;
+  color:#c5b2f5;
+  margin:18px 0 0;
+  font-size:14px;
+}
+.result{margin-top:25px;display:none}
+.result img{
+  width:100%;
+  display:block;
+  border-radius:12px;
+  border:1px solid #393a43;
+}
+.download{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  margin-top:14px;
+  background:#25262d;
+  color:white;
+  padding:14px;
+  border-radius:9px;
+  font-weight:bold;
+}
+.ad-box{
+  margin:25px 0;
+  min-height:90px;
+  border:1px dashed #41414a;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+  font-size:12px;
+}
+.history-title{font-size:19px;margin:35px 0 15px}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.gallery img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:9px;
+  border:1px solid #333;
+}
+footer{
+  text-align:center;
+  padding:25px;
+  border-top:1px solid #292a30;
+  color:#888;
+  font-size:13px;
+}
+.modal-bg{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#000b;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal{
+  width:min(400px,100%);
+  background:#1c1d23;
+  border:1px solid #45404f;
+  border-radius:15px;
+  padding:25px;
+  text-align:center;
+}
+.modal p{color:#bbb;line-height:1.6}
+.close{background:#333;color:white;margin-top:10px}
+@media(max-width:600px){
+  header{padding:0 4%;height:60px}
+  .logo{font-size:18px}
+  nav{gap:8px}
+  nav a{display:none}
+  nav button{padding:10px;font-size:12px}
+  main{margin:30px auto}
+  .intro h1{font-size:27px}
+  .panel{padding:16px}
+  .options{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+}
 </style>
 </head>
+
 <body>
+
 <header>
-  <div class="logo">NOVA<span> AI</span> STUDIO</div>
-  <small>Free tools • Creative workspace</small>
+  <div class="logo">NOVA <span>AI STUDIO</span></div>
+  <nav>
+    <a href="#generator">Image Generator</a>
+    <button class="premium" onclick="showPremium()">Upgrade</button>
+  </nav>
 </header>
 
 <main>
-  <section class="hero">
-    <h1>Create Without Limits</h1>
-    <p>Your free creative studio for AI images, voice and video editing.</p>
+  <section class="intro">
+    <h1>Turn Your Ideas Into Images</h1>
+    <p>Describe your imagination. Let AI create it.</p>
   </section>
 
-  <nav class="tabs">
-    <button class="tab active" data-tab="image">Image Generator</button>
-    <button class="tab" data-tab="voice">Voiceover</button>
-    <button class="tab" data-tab="video">Video Studio</button>
-  </nav>
+  <div class="ad-box">
+    Advertisement
+    <!-- Add your approved AdSense ad code here -->
+  </div>
 
-  <section class="panel active" id="image">
-    <h2>AI Image Generator</h2>
-    <p class="note">Generate an image using the connected NOVA AI backend.</p>
-    <label for="prompt">Describe your image</label>
-    <textarea id="prompt" maxlength="2048" placeholder="A cinematic realistic portrait of a majestic white wolf in a snowy forest, dramatic lighting..."></textarea>
-    <div class="row">
+  <section class="panel" id="generator">
+    <label for="prompt">Describe Your Image</label>
+    <textarea id="prompt" maxlength="2048"
+      placeholder="Example: A beautiful futuristic city at sunset, cinematic lighting, ultra realistic..."></textarea>
+
+    <div class="options">
       <div>
-        <label for="style">Style</label>
+        <label for="style">Image Style</label>
         <select id="style">
-          <option value="photorealistic">Photorealistic</option>
-          <option value="cinematic">Cinematic</option>
-          <option value="anime">Anime</option>
-          <option value="digital art">Digital art</option>
-          <option value="3D render">3D render</option>
-          <option value="fantasy art">Fantasy art</option>
+          <option value="">No specific style</option>
+          <option value="photorealistic photography">Realistic</option>
+          <option value="cinematic digital art">Cinematic</option>
+          <option value="beautiful 3D render">3D Art</option>
+          <option value="anime illustration">Anime</option>
+          <option value="watercolor painting">Watercolor</option>
+          <option value="professional portrait photography">Portrait</option>
+          <option value="fantasy concept art">Fantasy</option>
         </select>
       </div>
+
       <div>
-        <label for="ratio">Aspect ratio preference</label>
-        <select id="ratio">
-          <option value="square composition">Square</option>
-          <option value="portrait composition">Portrait</option>
-          <option value="landscape composition">Landscape</option>
-        </select>
-      </div>
-      <div>
-        <label for="quality">Quality</label>
+        <label for="quality">Image Quality</label>
         <select id="quality">
           <option value="4">Standard</option>
           <option value="6">High</option>
@@ -87,358 +229,156 @@ a{color:var(--cyan)}
         </select>
       </div>
     </div>
-    <button id="generateBtn">Generate Image</button>
-    <div class="status" id="imageStatus" role="status"></div>
-    <img id="imageResult" class="preview" alt="Generated image preview" hidden>
-    <p><a id="downloadImage" download="nova-ai-image.jpg" hidden>Download generated image</a></p>
+
+    <button class="generate" id="generateBtn" onclick="generateImage()">
+      ✨ Generate Image
+    </button>
+
+    <div class="status" id="status"></div>
+
+    <div class="result" id="result">
+      <img id="outputImage" alt="Your generated AI image">
+      <a class="download" id="downloadBtn" download="nova-ai-image.jpg">
+        Download Image
+      </a>
+    </div>
   </section>
 
-  <section class="panel" id="voice">
-    <h2>Free Voiceover Studio</h2>
-    <p class="note">Uses voices installed in your browser or device. Voice availability and language depend on your operating system and browser.</p>
-    <label for="voiceText">Enter your script</label>
-    <textarea id="voiceText" placeholder="اپنا وائس اوور یہاں لکھیں یا پیسٹ کریں..."></textarea>
-    <div class="row">
-      <div>
-        <label for="voiceSelect">Available voice</label>
-        <select id="voiceSelect"><option value="">Loading voices...</option></select>
-      </div>
-      <div>
-        <label for="voiceRate">Speaking speed</label>
-        <select id="voiceRate">
-          <option value="0.8">Slow</option>
-          <option value="1" selected>Normal</option>
-          <option value="1.15">Fast</option>
-        </select>
-      </div>
-    </div>
-    <button id="speakBtn">Play Voiceover</button>
-    <button class="secondary" id="pauseBtn">Pause</button>
-    <button class="secondary" id="resumeBtn">Resume</button>
-    <button class="secondary" id="stopBtn">Stop</button>
-    <div class="status" id="voiceStatus" role="status"></div>
-    <p class="note">Note: This browser-based voice feature plays speech. It does not promise MP3 downloads. No paid voice API is connected.</p>
-  </section>
+  <div class="ad-box">
+    Advertisement
+    <!-- Add your second approved AdSense ad code here -->
+  </div>
 
-  <section class="panel" id="video">
-    <h2>Video Studio</h2>
-    <p class="note">Load a video from your device, preview it, choose a section and export that section where your browser supports video recording.</p>
-    <label for="videoFile">Choose a video</label>
-    <input id="videoFile" type="file" accept="video/*">
-    <video id="videoPreview" controls playsinline></video>
-    <div class="row">
-      <div>
-        <label for="trimStart">Start time (seconds)</label>
-        <input id="trimStart" type="number" min="0" step="0.1" value="0">
-      </div>
-      <div>
-        <label for="trimEnd">End time (seconds)</label>
-        <input id="trimEnd" type="number" min="0" step="0.1" value="0">
-      </div>
-    </div>
-    <button id="exportVideoBtn" disabled>Export Selected Clip</button>
-    <div class="status" id="videoStatus" role="status"></div>
-    <video id="exportPreview" controls playsinline hidden></video>
-    <p><a id="downloadVideo" hidden download="nova-edited-video.webm">Download edited video</a></p>
-    <hr>
-    <h3>What this free editor currently supports</h3>
-    <p class="note">Local video preview, start/end trimming and browser-based clip export. This is not yet a full multi-track editor, and export format depends on browser support. No video-generation API is connected.</p>
-  </section>
+  <h2 class="history-title">Recent Creations</h2>
+  <div class="gallery" id="gallery"></div>
 </main>
 
-<footer>NOVA AI STUDIO • Built for free creative work</footer>
+<footer>
+  © 2026 NOVA AI STUDIO. All rights reserved.
+</footer>
+
+<div class="modal-bg" id="premiumModal" onclick="closePremiumOutside(event)">
+  <div class="modal">
+    <h2>NOVA Premium</h2>
+    <p>Premium membership and payment options will be available after payment gateway setup.</p>
+    <button class="close" onclick="hidePremium()">Close</button>
+  </div>
+</div>
 
 <script>
-const API_URL = "https://nova-ai-backend.zitband1.workers.dev/";
+const API_URL = "https://nova-ai-backend.zitband1.workers.dev/generate";
 
-document.querySelectorAll(".tab").forEach(button => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(panel => panel.classList.remove("active"));
-    button.classList.add("active");
-    document.getElementById(button.dataset.tab).classList.add("active");
-  });
-});
-
-// IMAGE GENERATOR
+const promptInput = document.getElementById("prompt");
+const styleInput = document.getElementById("style");
+const qualityInput = document.getElementById("quality");
+const statusBox = document.getElementById("status");
 const generateBtn = document.getElementById("generateBtn");
-const imageStatus = document.getElementById("imageStatus");
+const resultBox = document.getElementById("result");
+const outputImage = document.getElementById("outputImage");
+const downloadBtn = document.getElementById("downloadBtn");
+const gallery = document.getElementById("gallery");
 
-generateBtn.addEventListener("click", async () => {
-  const prompt = document.getElementById("prompt").value.trim();
-  const style = document.getElementById("style").value;
-  const ratio = document.getElementById("ratio").value;
-  const steps = Number(document.getElementById("quality").value);
-  const imageResult = document.getElementById("imageResult");
-  const downloadImage = document.getElementById("downloadImage");
+let currentImage = "";
+
+async function generateImage() {
+  const prompt = promptInput.value.trim();
 
   if (!prompt) {
-    imageStatus.textContent = "Please enter an image description.";
+    statusBox.textContent = "Please describe the image first.";
+    promptInput.focus();
     return;
   }
 
+  const style = styleInput.value;
+  const finalPrompt = style
+    ? prompt + ", " + style
+    : prompt;
+
   generateBtn.disabled = true;
-  imageStatus.textContent = "Generating your image. Please wait...";
-  imageResult.hidden = true;
-  downloadImage.hidden = true;
+  generateBtn.textContent = "Creating your image...";
+  statusBox.textContent = "Please wait. AI is creating your image.";
+  resultBox.style.display = "none";
 
   try {
-    const response = await fetch(API_URL + "generate", {
+    const response = await fetch(API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        prompt: `${prompt}. Style: ${style}. Composition: ${ratio}.`,
-        steps
+        prompt: finalPrompt,
+        steps: Number(qualityInput.value)
       })
     });
 
     const data = await response.json();
+
     if (!response.ok || !data.success || !data.dataURI) {
       throw new Error(data.error || "Image generation failed.");
     }
 
-    imageResult.src = data.dataURI;
-    imageResult.hidden = false;
-    downloadImage.href = data.dataURI;
-    downloadImage.hidden = false;
-    imageStatus.textContent = "Your image is ready.";
+    currentImage = data.dataURI;
+    outputImage.src = currentImage;
+    downloadBtn.href = currentImage;
+    resultBox.style.display = "block";
+    statusBox.textContent = "Your image is ready!";
+
+    saveToGallery(currentImage);
+
   } catch (error) {
-    imageStatus.textContent = "Error: " + error.message;
+    statusBox.textContent = "Error: " + error.message;
   } finally {
     generateBtn.disabled = false;
+    generateBtn.textContent = "✨ Generate Image";
   }
-});
+}
 
-// FREE DEVICE VOICEOVER
-const voiceSelect = document.getElementById("voiceSelect");
-const voiceStatus = document.getElementById("voiceStatus");
-let availableVoices = [];
-
-function loadVoices() {
-  if (!("speechSynthesis" in window)) {
-    voiceSelect.innerHTML = "<option>Speech is not supported in this browser</option>";
-    voiceStatus.textContent = "Your browser does not support built-in speech.";
-    return;
+function saveToGallery(image) {
+  try {
+    let images = JSON.parse(localStorage.getItem("novaGallery") || "[]");
+    images.unshift(image);
+    images = images.slice(0, 4);
+    localStorage.setItem("novaGallery", JSON.stringify(images));
+    renderGallery();
+  } catch (error) {
+    statusBox.textContent =
+      "Image created. Browser storage is full; download your image to keep it.";
   }
+}
 
-  availableVoices = speechSynthesis.getVoices();
-  voiceSelect.innerHTML = "";
+function renderGallery() {
+  const images = JSON.parse(localStorage.getItem("novaGallery") || "[]");
+  gallery.innerHTML = "";
 
-  if (!availableVoices.length) {
-    voiceSelect.innerHTML = "<option value=''>No voices found yet</option>";
-    return;
-  }
-
-  availableVoices.forEach((voice, index) => {
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = `${voice.name} (${voice.lang})`;
-    voiceSelect.appendChild(option);
+  images.forEach((src) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Previous creation";
+    img.style.cursor = "pointer";
+    img.onclick = () => {
+      currentImage = src;
+      outputImage.src = src;
+      downloadBtn.href = src;
+      resultBox.style.display = "block";
+      statusBox.textContent = "Previous image opened.";
+      window.scrollTo({top:300,behavior:"smooth"});
+    };
+    gallery.appendChild(img);
   });
 }
 
-if ("speechSynthesis" in window) {
-  loadVoices();
-  speechSynthesis.onvoiceschanged = loadVoices;
+function showPremium() {
+  document.getElementById("premiumModal").style.display = "flex";
 }
 
-document.getElementById("speakBtn").addEventListener("click", () => {
-  const text = document.getElementById("voiceText").value.trim();
-  if (!text) {
-    voiceStatus.textContent = "Please enter your script first.";
-    return;
-  }
-  if (!("speechSynthesis" in window)) {
-    voiceStatus.textContent = "Speech is not supported by this browser.";
-    return;
-  }
+function hidePremium() {
+  document.getElementById("premiumModal").style.display = "none";
+}
 
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  const selected = Number(voiceSelect.value);
-  if (availableVoices[selected]) utterance.voice = availableVoices[selected];
-  utterance.rate = Number(document.getElementById("voiceRate").value);
-  utterance.onstart = () => voiceStatus.textContent = "Playing voiceover...";
-  utterance.onend = () => voiceStatus.textContent = "Voiceover finished.";
-  utterance.onerror = event => voiceStatus.textContent = "Speech error: " + event.error;
-  speechSynthesis.speak(utterance);
-});
+function closePremiumOutside(event) {
+  if (event.target.id === "premiumModal") hidePremium();
+}
 
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  if ("speechSynthesis" in window) speechSynthesis.pause();
-});
-document.getElementById("resumeBtn").addEventListener("click", () => {
-  if ("speechSynthesis" in window) speechSynthesis.resume();
-});
-document.getElementById("stopBtn").addEventListener("click", () => {
-  if ("speechSynthesis" in window) speechSynthesis.cancel();
-  voiceStatus.textContent = "Voiceover stopped.";
-});
-
-// LOCAL VIDEO TRIM AND EXPORT
-const videoFile = document.getElementById("videoFile");
-const videoPreview = document.getElementById("videoPreview");
-const exportBtn = document.getElementById("exportVideoBtn");
-const videoStatus = document.getElementById("videoStatus");
-const exportPreview = document.getElementById("exportPreview");
-const downloadVideo = document.getElementById("downloadVideo");
-let sourceVideoUrl = null;
-let exportedVideoUrl = null;
-
-videoFile.addEventListener("change", () => {
-  const file = videoFile.files && videoFile.files[0];
-  if (!file) return;
-
-  if (sourceVideoUrl) URL.revokeObjectURL(sourceVideoUrl);
-  if (exportedVideoUrl) URL.revokeObjectURL(exportedVideoUrl);
-
-  sourceVideoUrl = URL.createObjectURL(file);
-  videoPreview.src = sourceVideoUrl;
-  exportPreview.hidden = true;
-  downloadVideo.hidden = true;
-  exportBtn.disabled = true;
-  videoStatus.textContent = "Loading video...";
-});
-
-videoPreview.addEventListener("loadedmetadata", () => {
-  document.getElementById("trimStart").value = 0;
-  document.getElementById("trimEnd").value = videoPreview.duration.toFixed(1);
-  exportBtn.disabled = false;
-  videoStatus.textContent = `Video loaded. Duration: ${videoPreview.duration.toFixed(1)} seconds.`;
-});
-
-exportBtn.addEventListener("click", async () => {
-  const start = Number(document.getElementById("trimStart").value);
-  const end = Number(document.getElementById("trimEnd").value);
-  const duration = videoPreview.duration;
-
-  if (!videoPreview.src || !Number.isFinite(duration)) {
-    videoStatus.textContent = "Please load a video first.";
-    return;
-  }
-  if (start < 0 || end <= start || end > duration) {
-    videoStatus.textContent = "Please enter a valid start and end time within the video duration.";
-    return;
-  }
-  if (!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) {
-    videoStatus.textContent = "Video export is not supported in this browser. Try an updated desktop Chrome or Edge.";
-    return;
-  }
-
-  exportBtn.disabled = true;
-  videoStatus.textContent = "Preparing clip export...";
-  downloadVideo.hidden = true;
-  exportPreview.hidden = true;
-
-  let canvasStream;
-  let combinedStream;
-  let recorder;
-  let chunks = [];
-  let animationId;
-
-  try {
-    const canvas = document.createElement("canvas");
-    const width = videoPreview.videoWidth || 1280;
-    const height = videoPreview.videoHeight || 720;
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-
-    canvasStream = canvas.captureStream(30);
-    const inputStream = videoPreview.captureStream
-      ? videoPreview.captureStream()
-      : videoPreview.mozCaptureStream
-        ? videoPreview.mozCaptureStream()
-        : null;
-
-    const tracks = [...canvasStream.getVideoTracks()];
-    if (inputStream) tracks.push(...inputStream.getAudioTracks());
-    combinedStream = new MediaStream(tracks);
-
-    const mimeTypes = [
-      "video/webm;codecs=vp9,opus",
-      "video/webm;codecs=vp8,opus",
-      "video/webm"
-    ];
-    const mimeType = mimeTypes.find(type => MediaRecorder.isTypeSupported(type));
-    if (!mimeType) throw new Error("No supported WebM recording format found.");
-
-    recorder = new MediaRecorder(combinedStream, { mimeType });
-    chunks = [];
-    recorder.ondataavailable = event => {
-      if (event.data && event.data.size) chunks.push(event.data);
-    };
-
-    const recordingDone = new Promise((resolve, reject) => {
-      recorder.onstop = resolve;
-      recorder.onerror = () => reject(new Error("Recording failed."));
-    });
-
-    const drawFrame = () => {
-      if (videoPreview.readyState >= 2) {
-        ctx.drawImage(videoPreview, 0, 0, width, height);
-      }
-      if (!videoPreview.paused && !videoPreview.ended) {
-        animationId = requestAnimationFrame(drawFrame);
-      }
-    };
-
-    videoPreview.pause();
-    videoPreview.currentTime = start;
-    await new Promise((resolve, reject) => {
-      const onSeek = () => { cleanup(); resolve(); };
-      const onError = () => { cleanup(); reject(new Error("Could not seek to selected start time.")); };
-      const cleanup = () => {
-        videoPreview.removeEventListener("seeked", onSeek);
-        videoPreview.removeEventListener("error", onError);
-      };
-      videoPreview.addEventListener("seeked", onSeek, { once: true });
-      videoPreview.addEventListener("error", onError, { once: true });
-    });
-
-    ctx.drawImage(videoPreview, 0, 0, width, height);
-    recorder.start(250);
-    await videoPreview.play();
-    drawFrame();
-
-    await new Promise((resolve, reject) => {
-      const checkEnd = () => {
-        if (videoPreview.currentTime >= end || videoPreview.ended) {
-          videoPreview.pause();
-          resolve();
-        } else if (videoPreview.error) {
-          reject(new Error("Video playback failed during export."));
-        } else {
-          requestAnimationFrame(checkEnd);
-        }
-      };
-      checkEnd();
-    });
-
-    if (recorder.state !== "inactive") recorder.stop();
-    await recordingDone;
-    if (animationId) cancelAnimationFrame(animationId);
-
-    const blob = new Blob(chunks, { type: mimeType });
-    if (!blob.size) throw new Error("The exported clip is empty.");
-
-    if (exportedVideoUrl) URL.revokeObjectURL(exportedVideoUrl);
-    exportedVideoUrl = URL.createObjectURL(blob);
-    exportPreview.src = exportedVideoUrl;
-    exportPreview.hidden = false;
-    downloadVideo.href = exportedVideoUrl;
-    downloadVideo.hidden = false;
-    videoStatus.textContent = "Clip exported. Use the download link to save it.";
-  } catch (error) {
-    if (recorder && recorder.state !== "inactive") recorder.stop();
-    if (animationId) cancelAnimationFrame(animationId);
-    videoStatus.textContent = "Export error: " + error.message;
-  } finally {
-    if (combinedStream) combinedStream.getTracks().forEach(track => track.stop());
-    if (canvasStream) canvasStream.getTracks().forEach(track => track.stop());
-    exportBtn.disabled = false;
-  }
-});
+renderGallery();
 </script>
+
 </body>
 </html>
