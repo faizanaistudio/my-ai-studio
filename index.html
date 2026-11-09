@@ -1,180 +1,60 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA AI STUDIO - AI Image Generator</title>
-<meta name="description" content="Create beautiful AI images from text for free with NOVA AI STUDIO.">
+<meta name="theme-color" content="#0b0d12">
+<title>NOVA AI FILM STUDIO</title>
+<meta name="description" content="Create stories, characters and cinematic AI images with NOVA AI Film Studio.">
+
 <style>
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#101114;
-  color:#f5f5f5;
-}
-header{
-  height:68px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 7%;
-  border-bottom:1px solid #292a30;
-  background:#15161a;
-}
-.logo{font-size:22px;font-weight:800;letter-spacing:1px}
+body{margin:0;background:#0b0d12;color:#f4f6fb;font-family:Arial,sans-serif}
+header{height:68px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:#111520;border-bottom:1px solid #293143;position:sticky;top:0;z-index:5}
+.logo{font-size:22px;font-weight:900;letter-spacing:1px}
 .logo span{color:#a78bfa}
-nav{display:flex;align-items:center;gap:18px}
-nav a{color:#bbb;text-decoration:none;font-size:14px}
-button{
-  cursor:pointer;
-  border:0;
-  border-radius:9px;
-  padding:12px 18px;
-  font-weight:700;
-}
-.premium{
-  background:#282235;
-  color:#d6baff;
-  border:1px solid #7054a5;
-}
-main{
-  width:min(950px,92%);
-  margin:45px auto;
-}
-.intro{text-align:center;margin-bottom:30px}
-.intro h1{font-size:34px;margin:0 0 12px}
-.intro p{color:#a4a4ad;margin:0;font-size:15px}
-.panel{
-  background:#191a20;
-  border:1px solid #303139;
-  border-radius:16px;
-  padding:25px;
-}
-label{display:block;font-size:14px;font-weight:700;margin-bottom:10px}
-textarea{
-  width:100%;
-  min-height:125px;
-  resize:vertical;
-  background:#111216;
-  color:white;
-  border:1px solid #393a43;
-  border-radius:10px;
-  padding:15px;
-  font-size:15px;
-  outline:none;
-  line-height:1.6;
-}
-textarea:focus{border-color:#9871e8}
-.options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-  margin-top:20px;
-}
-select{
-  width:100%;
-  padding:13px;
-  background:#111216;
-  color:white;
-  border:1px solid #393a43;
-  border-radius:9px;
-  outline:none;
-}
-.generate{
-  width:100%;
-  margin-top:22px;
-  background:linear-gradient(100deg,#7652d6,#a16be8);
-  color:white;
-  font-size:16px;
-  padding:15px;
-}
-.generate:disabled{opacity:.6;cursor:wait}
-.status{
-  text-align:center;
-  color:#c5b2f5;
-  margin:18px 0 0;
-  font-size:14px;
-}
-.result{margin-top:25px;display:none}
-.result img{
-  width:100%;
-  display:block;
-  border-radius:12px;
-  border:1px solid #393a43;
-}
-.download{
-  display:block;
-  text-align:center;
-  text-decoration:none;
-  margin-top:14px;
-  background:#25262d;
-  color:white;
-  padding:14px;
-  border-radius:9px;
-  font-weight:bold;
-}
-.ad-box{
-  margin:25px 0;
-  min-height:90px;
-  border:1px dashed #41414a;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#777;
-  font-size:12px;
-}
-.history-title{font-size:19px;margin:35px 0 15px}
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.gallery img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:9px;
-  border:1px solid #333;
-}
-footer{
-  text-align:center;
-  padding:25px;
-  border-top:1px solid #292a30;
-  color:#888;
-  font-size:13px;
-}
-.modal-bg{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000b;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-.modal{
-  width:min(400px,100%);
-  background:#1c1d23;
-  border:1px solid #45404f;
-  border-radius:15px;
-  padding:25px;
-  text-align:center;
-}
-.modal p{color:#bbb;line-height:1.6}
-.close{background:#333;color:white;margin-top:10px}
-@media(max-width:600px){
-  header{padding:0 4%;height:60px}
-  .logo{font-size:18px}
-  nav{gap:8px}
-  nav a{display:none}
-  nav button{padding:10px;font-size:12px}
-  main{margin:30px auto}
-  .intro h1{font-size:27px}
-  .panel{padding:16px}
-  .options{grid-template-columns:1fr}
-  .gallery{grid-template-columns:repeat(2,1fr)}
+.layout{max-width:1200px;margin:25px auto;padding:0 18px;display:grid;grid-template-columns:210px 1fr;gap:20px}
+.sidebar,.panel,.hero{background:#151a26;border:1px solid #30394b;border-radius:15px}
+.sidebar{padding:12px;height:max-content;position:sticky;top:85px}
+.nav{display:block;width:100%;padding:13px;text-align:left;background:transparent;color:#bbb;margin-bottom:5px}
+.nav.active{background:#30254b;color:white}
+main{min-width:0}
+.hero{padding:27px;margin-bottom:18px;background:linear-gradient(120deg,#21183c,#151a26)}
+.hero h1{font-size:32px;margin:8px 0}
+.hero p,.sub{color:#a5adbd}
+.panel{padding:22px;margin-bottom:18px}
+h2{font-size:20px;margin:0 0 6px}
+label{display:block;margin:15px 0 8px;font-size:14px;font-weight:bold}
+textarea,input,select{width:100%;padding:13px;background:#0c1018;color:white;border:1px solid #3a4355;border-radius:9px;outline:none}
+textarea{min-height:110px;resize:vertical}
+textarea:focus,input:focus,select:focus{border-color:#a78bfa}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{border:0;border-radius:9px;padding:12px;cursor:pointer;font-weight:bold}
+.primary{width:100%;margin-top:18px;background:linear-gradient(100deg,#7652d6,#a16be8);color:white;padding:15px;font-size:15px}
+.secondary{background:#30394b;color:white}
+button:disabled{opacity:.5;cursor:wait}
+.status{color:#b9a6f5;font-size:13px;margin-top:13px;min-height:18px}
+.hidden{display:none!important}
+.notice{background:#302817;border:1px solid #62502a;color:#ead9a8;padding:12px;border-radius:9px;font-size:12px;margin-top:15px}
+.drop{border:1px dashed #59647a;padding:18px;text-align:center;border-radius:10px;color:#aaa}
+.preview{max-width:100%;max-height:350px;display:block;margin-top:15px;border-radius:10px}
+.result{display:none;margin-top:20px}
+.result img{width:100%;border-radius:12px}
+.download{display:block;background:#30394b;color:white;text-decoration:none;text-align:center;padding:13px;border-radius:9px;margin-top:10px}
+.scene{background:#0c1018;border:1px solid #30394b;padding:13px;border-radius:10px;margin-top:12px}
+.scene button{float:right}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:pointer}
+footer{text-align:center;padding:25px;color:#888;border-top:1px solid #292a30;font-size:12px}
+@media(max-width:750px){
+.layout{grid-template-columns:1fr;margin:15px auto}
+.sidebar{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.nav{text-align:center;padding:10px 4px;font-size:12px}
+.grid{grid-template-columns:1fr}
+.hero h1{font-size:26px}
+.panel{padding:16px}
+.gallery{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -182,202 +62,378 @@ footer{
 <body>
 
 <header>
-  <div class="logo">NOVA <span>AI STUDIO</span></div>
-  <nav>
-    <a href="#generator">Image Generator</a>
-    <button class="premium" onclick="showPremium()">Upgrade</button>
-  </nav>
+<div class="logo">NOVA <span>AI FILM STUDIO</span></div>
+<div style="color:#aaa;font-size:12px">CREATIVE WORKSPACE</div>
 </header>
 
+<div class="layout">
+
+<aside class="sidebar">
+<button class="nav active" data-page="home">⌂ Workspace</button>
+<button class="nav" data-page="story">✎ Story & Scenes</button>
+<button class="nav" data-page="character">◉ Character Studio</button>
+<button class="nav" data-page="image">✦ Image Generator</button>
+<button class="nav" data-page="library">▦ My Library</button>
+</aside>
+
 <main>
-  <section class="intro">
-    <h1>Turn Your Ideas Into Images</h1>
-    <p>Describe your imagination. Let AI create it.</p>
-  </section>
 
-  <div class="ad-box">
-    Advertisement
-    <!-- Add your approved AdSense ad code here -->
-  </div>
-
-  <section class="panel" id="generator">
-    <label for="prompt">Describe Your Image</label>
-    <textarea id="prompt" maxlength="2048"
-      placeholder="Example: A beautiful futuristic city at sunset, cinematic lighting, ultra realistic..."></textarea>
-
-    <div class="options">
-      <div>
-        <label for="style">Image Style</label>
-        <select id="style">
-          <option value="">No specific style</option>
-          <option value="photorealistic photography">Realistic</option>
-          <option value="cinematic digital art">Cinematic</option>
-          <option value="beautiful 3D render">3D Art</option>
-          <option value="anime illustration">Anime</option>
-          <option value="watercolor painting">Watercolor</option>
-          <option value="professional portrait photography">Portrait</option>
-          <option value="fantasy concept art">Fantasy</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="quality">Image Quality</label>
-        <select id="quality">
-          <option value="4">Standard</option>
-          <option value="6">High</option>
-          <option value="8">Ultra</option>
-        </select>
-      </div>
-    </div>
-
-    <button class="generate" id="generateBtn" onclick="generateImage()">
-      ✨ Generate Image
-    </button>
-
-    <div class="status" id="status"></div>
-
-    <div class="result" id="result">
-      <img id="outputImage" alt="Your generated AI image">
-      <a class="download" id="downloadBtn" download="nova-ai-image.jpg">
-        Download Image
-      </a>
-    </div>
-  </section>
-
-  <div class="ad-box">
-    Advertisement
-    <!-- Add your second approved AdSense ad code here -->
-  </div>
-
-  <h2 class="history-title">Recent Creations</h2>
-  <div class="gallery" id="gallery"></div>
-</main>
-
-<footer>
-  © 2026 NOVA AI STUDIO. All rights reserved.
-</footer>
-
-<div class="modal-bg" id="premiumModal" onclick="closePremiumOutside(event)">
-  <div class="modal">
-    <h2>NOVA Premium</h2>
-    <p>Premium membership and payment options will be available after payment gateway setup.</p>
-    <button class="close" onclick="hidePremium()">Close</button>
-  </div>
+<div class="hero">
+<div style="color:#64d8d0;font-size:11px;letter-spacing:2px">AI FILM PRODUCTION</div>
+<h1>Bring Your Story To Life.</h1>
+<p>Create stories, build characters and generate cinematic images in one workspace.</p>
 </div>
 
+<!-- WORKSPACE -->
+
+<section id="page-home" class="page">
+<div class="panel">
+<h2>Start a New Film</h2>
+<p class="sub">Create your film project.</p>
+
+<label>Project Name</label>
+<input id="projectName" placeholder="My New Film">
+
+<label>Story Idea</label>
+<textarea id="filmIdea" placeholder="Write your film idea..."></textarea>
+
+<button class="primary" onclick="saveProject()">Save Project</button>
+<div class="status" id="homeStatus"></div>
+</div>
+
+<div class="panel">
+<h2>Production Workflow</h2>
+<p class="sub">Your creative journey starts here.</p>
+<p>01 — Story Writing</p>
+<p>02 — Character Creation</p>
+<p>03 — Scene Planning</p>
+<p>04 — AI Image Generation</p>
+<p>05 — Video Production</p>
+</div>
+</section>
+
+<!-- STORY -->
+
+<section id="page-story" class="page hidden">
+<div class="panel">
+<h2>Story & Scene Planner</h2>
+<p class="sub">Divide your story into scenes.</p>
+
+<label>Your Story</label>
+<textarea id="storyText" placeholder="Write your complete story..."></textarea>
+
+<button class="primary" onclick="createScenes()">Create Scenes</button>
+<div class="status" id="storyStatus"></div>
+<div id="sceneList"></div>
+</div>
+</section>
+
+<!-- CHARACTER -->
+
+<section id="page-character" class="page hidden">
+<div class="panel">
+<h2>Character Studio</h2>
+<p class="sub">Create and save your character identity.</p>
+
+<label>Character Name</label>
+<input id="charName" placeholder="Character name">
+
+<div class="grid">
+<div>
+<label>Age</label>
+<input id="charAge" placeholder="Age">
+</div>
+<div>
+<label>Character Role</label>
+<input id="charRole" placeholder="Hero / Villain">
+</div>
+</div>
+
+<label>Character Appearance</label>
+<textarea id="charLook" placeholder="Face shape, eyes, hair, skin tone, clothing and other identifying details..."></textarea>
+
+<label>Reference Image</label>
+<div class="drop">
+Upload Character Reference
+<input type="file" id="charFile" accept="image/*">
+</div>
+
+<img id="charPreview" class="preview hidden" alt="Character reference">
+
+<label>Identity Lock Details</label>
+<textarea id="charLock" placeholder="Details that must remain exactly the same in every scene..."></textarea>
+
+<button class="primary" onclick="saveCharacter()">Save Character</button>
+<button class="secondary" style="width:100%;margin-top:10px" onclick="makeCharacterPrompt()">Generate 3-Pose Sheet Prompt</button>
+
+<div class="status" id="charStatus"></div>
+
+<div id="promptArea" class="hidden">
+<label>Character Sheet Prompt</label>
+<textarea id="characterPrompt" readonly></textarea>
+<button class="secondary" onclick="copyPrompt()">Copy Prompt</button>
+</div>
+
+<div class="notice">
+Reference image is currently previewed locally. Actual image-based identity preservation requires a compatible image-to-image backend model.
+</div>
+</div>
+</section>
+
+<!-- IMAGE GENERATOR -->
+
+<section id="page-image" class="page hidden">
+<div class="panel">
+<h2>AI Image Generator</h2>
+<p class="sub">Turn your imagination into images.</p>
+
+<label>Describe Your Image</label>
+<textarea id="imagePrompt" maxlength="2048" placeholder="A cinematic castle in a beautiful sunset..."></textarea>
+
+<div class="grid">
+<div>
+<label>Image Style</label>
+<select id="style">
+<option value="">Default</option>
+<option value="photorealistic photography">Realistic</option>
+<option value="cinematic digital art">Cinematic</option>
+<option value="beautiful 3D render">3D Art</option>
+<option value="anime illustration">Anime</option>
+<option value="watercolor painting">Watercolor</option>
+<option value="fantasy concept art">Fantasy</option>
+</select>
+</div>
+
+<div>
+<label>Quality Steps</label>
+<select id="quality">
+<option value="4">Standard</option>
+<option value="6">High</option>
+<option value="8">Ultra</option>
+</select>
+</div>
+</div>
+
+<button class="primary" id="generateBtn" onclick="generateImage()">✨ Generate Image</button>
+
+<div class="status" id="imageStatus"></div>
+
+<div class="result" id="result">
+<img id="outputImage" alt="Generated AI image">
+<a id="downloadBtn" class="download" download="nova-image.png">Download Image</a>
+</div>
+</div>
+</section>
+
+<!-- LIBRARY -->
+
+<section id="page-library" class="page hidden">
+<div class="panel">
+<h2>My Library</h2>
+<p class="sub">Your recent creations.</p>
+<div id="gallery" class="gallery"></div>
+<p id="emptyLibrary" style="color:#999">No images generated yet.</p>
+</div>
+</section>
+
+</main>
+</div>
+
+<footer>© 2026 NOVA AI FILM STUDIO. All rights reserved.</footer>
+
 <script>
-const API_URL = "https://nova-ai-backend.zitband1.workers.dev/generate";
+const API_URL="https://nova-ai-backend.zitband1.workers.dev/generate";
 
-const promptInput = document.getElementById("prompt");
-const styleInput = document.getElementById("style");
-const qualityInput = document.getElementById("quality");
-const statusBox = document.getElementById("status");
-const generateBtn = document.getElementById("generateBtn");
-const resultBox = document.getElementById("result");
-const outputImage = document.getElementById("outputImage");
-const downloadBtn = document.getElementById("downloadBtn");
-const gallery = document.getElementById("gallery");
+const $=id=>document.getElementById(id);
 
-let currentImage = "";
+document.querySelectorAll(".nav").forEach(button=>{
+button.onclick=()=>{
+document.querySelectorAll(".page").forEach(page=>page.classList.add("hidden"));
+$("page-"+button.dataset.page).classList.remove("hidden");
+document.querySelectorAll(".nav").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+};
+});
 
-async function generateImage() {
-  const prompt = promptInput.value.trim();
-
-  if (!prompt) {
-    statusBox.textContent = "Please describe the image first.";
-    promptInput.focus();
-    return;
-  }
-
-  const style = styleInput.value;
-  const finalPrompt = style
-    ? prompt + ", " + style
-    : prompt;
-
-  generateBtn.disabled = true;
-  generateBtn.textContent = "Creating your image...";
-  statusBox.textContent = "Please wait. AI is creating your image.";
-  resultBox.style.display = "none";
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        prompt: finalPrompt,
-        steps: Number(qualityInput.value)
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok || !data.success || !data.dataURI) {
-      throw new Error(data.error || "Image generation failed.");
-    }
-
-    currentImage = data.dataURI;
-    outputImage.src = currentImage;
-    downloadBtn.href = currentImage;
-    resultBox.style.display = "block";
-    statusBox.textContent = "Your image is ready!";
-
-    saveToGallery(currentImage);
-
-  } catch (error) {
-    statusBox.textContent = "Error: " + error.message;
-  } finally {
-    generateBtn.disabled = false;
-    generateBtn.textContent = "✨ Generate Image";
-  }
+function saveProject(){
+const project={
+name:$("projectName").value,
+idea:$("filmIdea").value
+};
+localStorage.setItem("novaProject",JSON.stringify(project));
+$("homeStatus").textContent="Project saved successfully!";
 }
 
-function saveToGallery(image) {
-  try {
-    let images = JSON.parse(localStorage.getItem("novaGallery") || "[]");
-    images.unshift(image);
-    images = images.slice(0, 4);
-    localStorage.setItem("novaGallery", JSON.stringify(images));
-    renderGallery();
-  } catch (error) {
-    statusBox.textContent =
-      "Image created. Browser storage is full; download your image to keep it.";
-  }
+function createScenes(){
+const story=$("storyText").value.trim();
+if(!story){
+$("storyStatus").textContent="Please write your story first.";
+return;
+}
+const scenes=story.split(/(?<=[.!?۔])\s+/).filter(Boolean);
+const list=$("sceneList");
+list.innerHTML="";
+scenes.forEach((scene,index)=>{
+const box=document.createElement("div");
+box.className="scene";
+const title=document.createElement("strong");
+title.textContent="Scene "+(index+1);
+const text=document.createElement("p");
+text.textContent=scene;
+const btn=document.createElement("button");
+btn.className="secondary";
+btn.textContent="Use Scene";
+btn.onclick=()=>{
+$("imagePrompt").value="Cinematic film scene: "+scene;
+document.querySelector('[data-page="image"]').click();
+};
+box.append(title,btn,text);
+list.appendChild(box);
+});
+$("storyStatus").textContent=scenes.length+" scenes created.";
 }
 
-function renderGallery() {
-  const images = JSON.parse(localStorage.getItem("novaGallery") || "[]");
-  gallery.innerHTML = "";
+let referenceImage="";
 
-  images.forEach((src) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = "Previous creation";
-    img.style.cursor = "pointer";
-    img.onclick = () => {
-      currentImage = src;
-      outputImage.src = src;
-      downloadBtn.href = src;
-      resultBox.style.display = "block";
-      statusBox.textContent = "Previous image opened.";
-      window.scrollTo({top:300,behavior:"smooth"});
-    };
-    gallery.appendChild(img);
-  });
+$("charFile").onchange=event=>{
+const file=event.target.files[0];
+if(!file)return;
+if(!file.type.startsWith("image/"))return;
+if(referenceImage)URL.revokeObjectURL(referenceImage);
+referenceImage=URL.createObjectURL(file);
+$("charPreview").src=referenceImage;
+$("charPreview").classList.remove("hidden");
+};
+
+function saveCharacter(){
+const character={
+name:$("charName").value,
+age:$("charAge").value,
+role:$("charRole").value,
+appearance:$("charLook").value,
+identity:$("charLock").value
+};
+if(!character.name||!character.appearance){
+$("charStatus").textContent="Enter character name and appearance.";
+return;
+}
+localStorage.setItem("novaCharacter",JSON.stringify(character));
+$("charStatus").textContent="Character profile saved!";
 }
 
-function showPremium() {
-  document.getElementById("premiumModal").style.display = "flex";
+function makeCharacterPrompt(){
+const name=$("charName").value||"the same character";
+const look=$("charLook").value;
+const identity=$("charLock").value||look;
+if(!look){
+$("charStatus").textContent="Describe the character first.";
+return;
+}
+$("characterPrompt").value=
+"Create a professional text-free character reference sheet of "+name+
+". Preserve exactly the same facial identity, facial structure, eyes, nose, lips, hairstyle, skin tone, body proportions and clothing in all three poses. Character appearance: "+
+look+
+". Details that must never change: "+identity+
+". Show exactly three views side by side: front view, three-quarter view and side profile. Full body, neutral standing pose, plain studio background, consistent lighting, photorealistic details. No text, no labels, no watermark, no extra people.";
+$("promptArea").classList.remove("hidden");
+$("charStatus").textContent="Character sheet prompt created.";
 }
 
-function hidePremium() {
-  document.getElementById("premiumModal").style.display = "none";
+function copyPrompt(){
+$("characterPrompt").select();
+document.execCommand("copy");
+$("charStatus").textContent="Prompt copied!";
 }
 
-function closePremiumOutside(event) {
-  if (event.target.id === "premiumModal") hidePremium();
+async function generateImage(){
+const prompt=$("imagePrompt").value.trim();
+if(!prompt){
+$("imageStatus").textContent="Please enter an image description.";
+return;
+}
+const style=$("style").value;
+const finalPrompt=style?prompt+", "+style:prompt;
+const btn=$("generateBtn");
+btn.disabled=true;
+btn.textContent="Creating Image...";
+$("imageStatus").textContent="Please wait while AI creates your image.";
+$("result").style.display="none";
+
+try{
+const response=await fetch(API_URL,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({
+prompt:finalPrompt,
+steps:Number($("quality").value)
+})
+});
+const data=await response.json();
+if(!response.ok||!data.success||!data.dataURI){
+throw new Error(data.error||"Image generation failed.");
+}
+$("outputImage").src=data.dataURI;
+$("downloadBtn").href=data.dataURI;
+$("result").style.display="block";
+$("imageStatus").textContent="Your image is ready!";
+saveImage(data.dataURI);
+}catch(error){
+$("imageStatus").textContent="Error: "+error.message;
+}finally{
+btn.disabled=false;
+btn.textContent="✨ Generate Image";
+}
 }
 
+function saveImage(image){
+try{
+let images=JSON.parse(localStorage.getItem("novaImages")||"[]");
+images.unshift(image);
+images=images.slice(0,10);
+localStorage.setItem("novaImages",JSON.stringify(images));
 renderGallery();
+}catch(e){
+$("imageStatus").textContent="Image created. Download it to keep it safe.";
+}
+}
+
+function renderGallery(){
+let images=[];
+try{images=JSON.parse(localStorage.getItem("novaImages")||"[]");}catch(e){}
+$("gallery").innerHTML="";
+$("emptyLibrary").classList.toggle("hidden",images.length>0);
+images.forEach(src=>{
+const img=document.createElement("img");
+img.src=src;
+img.alt="Saved image";
+img.onclick=()=>{
+$("outputImage").src=src;
+$("downloadBtn").href=src;
+$("result").style.display="block";
+document.querySelector('[data-page="image"]').click();
+};
+$("gallery").appendChild(img);
+});
+}
+
+(function loadSaved(){
+try{
+const p=JSON.parse(localStorage.getItem("novaProject")||"null");
+if(p){
+$("projectName").value=p.name||"";
+$("filmIdea").value=p.idea||"";
+}
+const c=JSON.parse(localStorage.getItem("novaCharacter")||"null");
+if(c){
+$("charName").value=c.name||"";
+$("charAge").value=c.age||"";
+$("charRole").value=c.role||"";
+$("charLook").value=c.appearance||"";
+$("charLock").value=c.identity||"";
+}
+}catch(e){}
+renderGallery();
+})();
 </script>
 
 </body>
